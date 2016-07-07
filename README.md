@@ -6,12 +6,15 @@ Better tools enable new discoveries; it is as true for computation as it is for 
 
 This workshop addresses the challenges and requirements for working effectively on cloud computing and high performance computing resources, discusses the key principles that should guide responsible scientific computation and collaboration, and using hands-on sessions presents practical solutions using emergent software tools that are becoming widely adopted in the global scientific community. Specifically, we will look at using “containers” to bundle software applications and their full execution environment in a portable way. We will look at managing and sharing data across distributed resources. And finally, we will tackle how to orchestrate job execution across systems and capture metadata on the results (and the process) so that parameters and methodologies are not lost. And perhaps the most important part, we will not be using the command line to achieve this.
 
+## Pre-workshop Preparation
+
+To participate in the workshop activities, you will need to bring your own computer and have a Cyverse account.  Cyverse accounts may be freely created here: [https://user.cyverse.org/](https://user.cyverse.org/)
 
 ## Schedule
 
 |Time           | Topic                                                                                    |
 |---------------|------------------------------------------------------------------------------------------|
-|  8:30 -  9:00 | [Overview and introductions (Presentation and Discussion)](TACC_Agave_Overview.pdf)      |
+|  8:30 -  9:00 | [Overview and introductions (Presentation and Discussion)](https://docs.google.com/presentation/d/1RioNnjvL2qyRPQHSQ2-MG04m_LwNzf9gGqHwsSpCguM/edit?usp=sharing)      |
 |  9:00 -  9:20 | [Connect laptops to online resources (Hands-on)](connect.md)                             |
 |  9:20 - 10:15 | [Containerization tutorial (Hands-on)](docker.md)                                        |
 | 10:15 - 10:45 | Coffee break                                                                             |
