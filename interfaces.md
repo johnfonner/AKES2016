@@ -1,4 +1,4 @@
-# Web Portals
+# User Interfaces
 
 The Cyverse Science APIs provide a consistent interface for accessing and extending the data resources, execution resources that form the underlying cyberinfrastructure.  We can utilize this interface through the command line and within scripts, which we have focused on thus far, and an increasing number of groups are building web apps that provide bespoke, accessible tools for streamlining data science.  In this section, we will briefly look at a number of web portal implementations and discuss the use cases for building web apps on the Science APIs as well as tools and resources that make developing such apps easier.
 
@@ -29,3 +29,5 @@ The Cyverse Science APIs provide a consistent interface for accessing and extend
 # Agave ToGo 
 
 [http://togo.agaveapi.co/](https://togo.agaveapi.co/)
+
+![Agave ToGo](images/togo-agave.png)

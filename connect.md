@@ -1,6 +1,6 @@
 ## Agave JupyterHub
 
-The easiest way to get started is to use the hosted JupyterHub located at https://jupyter.agaveapi.co.  Login with the credentials you just created.
+The easiest way to get started is to use the hosted JupyterHub located at https://jupyter.cyverse.agaveapi.co.  Login with the credentials you just created.
 
 ## Command line access
 

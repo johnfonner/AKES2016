@@ -12,21 +12,21 @@ To participate in the workshop activities, you will need to bring your own compu
 
 ## Schedule
 
-|Time           | Topic                                                                                    |
-|---------------|------------------------------------------------------------------------------------------|
-|  8:30 -  9:00 | [Overview and introductions (Presentation and Discussion)](https://docs.google.com/presentation/d/1RioNnjvL2qyRPQHSQ2-MG04m_LwNzf9gGqHwsSpCguM/edit?usp=sharing)      |
-|  9:00 -  9:20 | [Connect laptops to online resources (Hands-on)](connect.md)                             |
-|  9:20 - 10:15 | [Containerization tutorial (Hands-on)](docker.md)                                        |
+|Time           | Topic                                                                                    | Presenter |
+|---------------|------------------------------------------------------------------------------------------|-----------|
+|  8:30 -  9:00 | [Overview and introductions (Presentation and Discussion)](https://docs.google.com/presentation/d/1RioNnjvL2qyRPQHSQ2-MG04m_LwNzf9gGqHwsSpCguM/edit?usp=sharing)      | Matt Vaughn |
+|  9:00 -  9:20 | [Connect laptops to online resources (Hands-on)](connect.md)                             | John Fonner |
+|  9:20 - 10:15 | [Containerization tutorial (Hands-on)](docker.md)                                        | Matt Vaughn |
 | 10:15 - 10:45 | Coffee break                                                                             |
-| 10:45 - 11:05 | [Cyverse Science APIs (Presentation)](Science_APIs.pptx)                                 |
-| 11:05 - 12:00 | [Hacking session 1: Systems and Data movement (Hands-on)](systems.md)                    |
-| 12:00 - 13:00 | Lunch                                                                                    |
-| 13:00 - 13:50 | [Hacking session 2: Scalable Analyses (Hands-on)](apps.md)                               |
-| 13:50 - 14:10 | [Metadata and Reproducibility (Presentation and Discussion)](reproducibility.pptx)       |
-| 14:10 - 14:50 | [Hacking session 3: Metadata, Reproducibility, and Collaboration (Hands-on)](sharing.md) |
-| 14:50 - 15:30 | [Workflow example (Hands-on)](workflow.md)                                               |
+| 10:45 - 11:05 | [Cyverse Science APIs (Presentation)](Science_APIs.pptx)                                 | John Fonner |
+| 11:05 - 12:00 | [Hacking session 1: Systems and Data movement (Hands-on)](systems.md)                    | John Fonner |
+| 12:00 - 13:00 | Lunch                                                                                    | 
+| 13:00 - 13:50 | [Hacking session 2: Scalable Analyses (Hands-on)](apps.md)                               | Matt Vaughn |
+| 13:50 - 14:10 | [Metadata and Reproducibility (Presentation and Discussion)](reproducibility.pptx)       | John Fonner |
+| 14:10 - 14:50 | [Hacking session 3: Metadata, Reproducibility, and Collaboration (Hands-on)](sharing.md) | John Fonner |
+| 14:50 - 15:30 | [Workflow example (Hands-on)](workflow.md)                                               | John Fonner |
 | 15:30 - 16:00 | Coffee break                                                                             |
-| 16:00 - 16:30 | [Web portals (Presentation)](portals.md)                                                 |
+| 16:00 - 16:30 | [User Interfaces (Presentation)](interfaces.md)                                          | Matt Vaughn |
 | 16:30 - 17:15 | Real world applications (Q&A Session and Discussion)                                     |
 | 17:15 - 17:30 | Closing thoughts and participation survey                                                | 
 
