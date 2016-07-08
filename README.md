@@ -14,7 +14,7 @@ To participate in the workshop activities, you will need to bring your own compu
 
 |Time           | Topic                                                                                    | Presenter |
 |---------------|------------------------------------------------------------------------------------------|-----------|
-|  8:30 -  9:00 | [Overview and introductions (Presentation and Discussion)](https://docs.google.com/presentation/d/1RioNnjvL2qyRPQHSQ2-MG04m_LwNzf9gGqHwsSpCguM/edit?usp=sharing)      | Matt Vaughn |
+|  8:30 -  9:00 | [Overview and introductions (Presentation and Discussion)](AKES2016-intro.pdf)           | Matt Vaughn |
 |  9:00 -  9:20 | [Connect laptops to online resources (Hands-on)](connect.md)                             | John Fonner |
 |  9:20 - 10:15 | [Containerization tutorial (Hands-on)](docker.md)                                        | Matt Vaughn |
 | 10:15 - 10:45 | Coffee break                                                                             |
