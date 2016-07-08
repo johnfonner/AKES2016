@@ -171,6 +171,8 @@ For instance, try this one out:
 
 ```docker run docker/whalesay cowsay "Hello, BOSC!"```
 
+![Output from docker/whalesay](images/cowsway.png)
+
 ### Building your own container
 
 In the remaining time (or on your own), try Dockerizing an application yourself. Pretty soon, you'll be unstoppable (or insufferable)!
