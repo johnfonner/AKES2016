@@ -10,6 +10,8 @@ These issues have made it challenging for users to integrate new applications an
 
 Additionally, public repositories of docker containers, such as [dockerhub.com](dockerhub.com) and [quay.io](quay.io), make it simple to share containers and use containers built by others.
 
+![Docker hub screenshot](images/dockerhub.png)
+
 ## Containers vs. virtual machines (VMs)
 
 The Docker website itself provides a concise comparison of containers and virtual machines [here](https://www.docker.com/what-docker#/VM).  The major commercial driver for developing and adopting the use of containers is web hosting.  Before containers, the best way to host a website in the cloud was to package everything into a virtual machine.  That way, if the host needed maintenance or a hardware update, the VM could be moved to a different server, web traffic could be sent to the new server, and there would ideally be no downtime.  Unfortunately, VMs are typically quite large in size, have a performance penalty because of the virtualization layer, and take several minutes (usually) to boot or reboot the VM image.
@@ -153,15 +155,11 @@ As we saw before, part of Docker's usefulness is that one can tag and version co
 
 Today, let's use your *local username on the Dockerhost*. So, if you are building `bwa` and are logged in as user `demo16`, use the tag `demo16/bwa` like so `docker build -t demo16/bwa  .`
 
-Go ahead and imprt your Dockerfile and build an image. Likely, a lot of information will fly by! When you're done, confirm that your (and other people's images) built by typing `docker images`
+Go ahead and import your Dockerfile and build an image. Likely, a lot of information will fly by! When it looks like everything has completed, confirm that your image go built by typing `docker images`
 
-You should see something like:
+You should see something like this, except there will also be an image with your TAG associated with it.
 
-```docker images
-REPOSITORY           TAG                 IMAGE ID            CREATED             SIZE
-mwvaughn/kallisto    latest              307c7e5ac421        13 minutes ago      276.1 MB
-ubuntu               14.04               38c759202e30        2 weeks ago         196.6 MB
-rocker/hadleyverse   latest              2a039f703dad        3 months ago        2.869 GB```
+![Output from docker images command](images/docker-images.png)
 
 ### Run a container
 
@@ -174,4 +172,6 @@ For instance, try this one out:
 ```docker run docker/whalesay cowsay "Hello, BOSC!"```
 
 ### Building your own container
+
+In the remaining time (or on your own), make sure to try install Docker on your own system and try Dockerizing an application yourself. Pretty soon, you'll be unstoppable (or insufferable)!
 
