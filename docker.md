@@ -20,10 +20,21 @@ Containers provide an equally convenient way of packaging software along with al
 
 For future reference, Docker provides downloadable tools for most operating systems.  This means that you can build and develop apps and workflows on your own computer, run test jobs locally on your computer, and once everything is working, use that same docker app on any system that has the Docker Engine installed.
 
+### Setting up
+
+You can [install Docker on Linux, Mac or even Windows systems](https://docs.docker.com/engine/installation/) and we encourage you to do so. In the interests of time, however, we've created a Docker host on [Jetstream](http://use.jetstream-cloud.org), a cloud computing system provided via XSEDE. The system has several test accounts that are all configured to use Docker from a command line interface, and it is available via a web-based SSH terminal
+
+* Go to [http://js-18-186.jetstream-cloud.org/](http://js-18-186.jetstream-cloud.org/)
+* Log in with a test account. The usernames are: `demo1-32` and the corresponding passwords are `1-32demo`
+* Please don't replicate this setup - it's terribly insecure but we wanted to make things easy for the AKES session.
+
+You will see a screen resembling this one if you are successful in connecting to the host:
+
+![Jetstream Terminal](/images/login.png)
 
 ### Running an existing container
 
-Before we make our own app, let's try running an existing app.  
+Before we make our own app, let's try running an existing app. Type this command into the terminal on the Docker host:
 
 ```
 docker run hello-world
@@ -59,7 +70,7 @@ For more examples and ideas, visit:
  https://docs.docker.com/engine/userguide/
 ```
 
-If we look closely at the output, we see that Docker looked on the computer where it was running first to see if it had a downloaded copy of that container.  When it didn't find a container named hello-world, it went to search a hosting service (by default dockerhub) to see if there was a matching image.  Notice that since we didn't give a version, it just looked for the "latest" version, and since we didn't specify the author of the container, it looked in its "library" of official containers.  After it downloaded the container, it ran the container, and the container printed out some information for us.
+If we look closely at the output, we see that Docker looked on the computer where it was running first to see if it had a downloaded copy of that container.  When it didn't find a container named hello-world, it went to search a hosting service (by default dockerhub) to see if there was a matching image.  Notice that since we didn't give a version, it just looked for the "latest" version, and since we didn't specify the author of the container, it looked in its "library" of official containers.  After it downloaded the container, it ran the container, and the container printed out some information for us. Since we're in a multi-user environment, someone else may have already pulled the `hello-world` image, but that's OK. 
 
 This is a very simple toy example, but let's look at what went into creating this Docker image.  This image was actually generated from a GitHub repository, which is publically visible here: [https://github.com/docker-library/hello-world/tree/master/hello-world](https://github.com/docker-library/hello-world/tree/master/hello-world)
 
@@ -88,6 +99,79 @@ When Docker builds an image, it sets its current directory to wherever you run t
 #### [CMD](https://docs.docker.com/engine/reference/builder/#/cmd)
 
 The CMD is the default command that runs when we run a Docker container.  We could override the default command, as we'll show later, but this example is pretty much a one trick pony.
+
+### A little more sophisticated example: NCBI BLAST+
+
+Here is the Dockerfile for a very commonly accessed image, our old friend NCBI BLAST+. This file is accessible at a public [Github repository](https://github.com/simonalpha/ncbi-blast-docker) or via the image's [Docker Hub page](https://hub.docker.com/r/simonalpha/ncbi-blast-docker/~/dockerfile/).
+
+```
+#
+# NCBI BLAST+ 2.2.30+ Dockerfile
+#
+# https://github.com/simonalpha/ncbi-blast-docker
+# https://github.com/simonalpha/ncbi-blast-docker/tree/master/ncbi-blast-2.2.30+
+#
+# Provide`s NCBI BLAST+ binaries, mainly for use with Galaxy Project dockerised runners
+
+FROM debian:wheezy
+
+MAINTAINER Simon Belluzzo <simon@belluzzo.id.au>
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		curl \
+		python-minimal=2.7.3-4+deb7u1 \
+	&& rm -rf /var/lib/apt/lists/*
+
+# Download & install BLAST
+RUN mkdir /opt/blast \
+      && curl ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.30/ncbi-blast-2.2.30+-x64-linux.tar.gz \
+      | tar -zxC /opt/blast --strip-components=1
+
+ENV PATH /opt/blast/bin:$PATH
+
+# set default behaviour
+WORKDIR /blast
+CMD ["bash"]
+```
+
+A key idea here is that the step-by-step instructions for installing and configuring BLAST are described in a simple, readable text file that can put under source control. This helps with reproducibility (a lot!).
+
+### Building a Docker container
+
+If you have Dockerfile that you like, feel free to paste it into a file and use it in the next step. Otherwise, you may import one of these Dockerfiles and use it instead. 
+
+* [Kallisto](https://raw.githubusercontent.com/cyverseuk/kallisto/master/Dockerfile)
+* [FastQC](https://raw.githubusercontent.com/conradstoerker/fastqc/master/Dockerfile)
+* [BWA](https://raw.githubusercontent.com/lh3/bwa-docker/master/Dockerfile)
+* [Spades](https://raw.githubusercontent.com/nucleotides/docker-spades/master/Dockerfile)
+
+Hint: To import a URL into a local Dockerfile use `curl -skL -O $URL`
+
+#### Let's build!
+
+As we saw before, part of Docker's usefulness is that one can tag and version containers so that people, not just computers, can make effective use of them. So, before we build our own container, we need to choose a tag name. It's usually easy to just use the name of the software you are building. For example, if you're building a `Moof` container, a good tag name is `moof`. If you have a Dockerhub (or other public registry) account, you can add your username to the front of the tag. My Dockerhub account is `mwvaughn` so I could use a tag `mwvaughn/moof` when I build my Moof container.
+
+Today, let's use your *local username on the Dockerhost*. So, if you are building `bwa` and are logged in as user `demo16`, use the tag `demo16/bwa` like so `docker build -t demo16/bwa  .`
+
+Go ahead and imprt your Dockerfile and build an image. Likely, a lot of information will fly by! When you're done, confirm that your (and other people's images) built by typing `docker images`
+
+You should see something like:
+
+```docker images
+REPOSITORY           TAG                 IMAGE ID            CREATED             SIZE
+mwvaughn/kallisto    latest              307c7e5ac421        13 minutes ago      276.1 MB
+ubuntu               14.04               38c759202e30        2 weeks ago         196.6 MB
+rocker/hadleyverse   latest              2a039f703dad        3 months ago        2.869 GB```
+
+### Run a container
+
+Go ahead and make your container go... 
+
+```docker run [docker-options] TAG [command] [command options]```
+
+For instance, try this one out:
+
+```docker run docker/whalesay cowsay "Hello, BOSC!"```
 
 ### Building your own container
 
