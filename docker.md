@@ -136,7 +136,7 @@ WORKDIR /blast
 CMD ["bash"]
 ```
 
-A key idea here is that the step-by-step instructions for installing and configuring BLAST are described in a simple, readable text file that can put under source control. This helps with reproducibility (a lot!).
+:star2: Key idea: Step-by-step instructions for installing and configuring BLAST are described in a simple, readable text file that can be shared and maintained under source control. This helps with reproducibility (a lot!).
 
 ### Building a Docker container
 
@@ -151,19 +151,19 @@ Hint: To import a URL into a local Dockerfile use `curl -skL -O $URL`
 
 #### Let's build!
 
-As we saw before, part of Docker's usefulness is that one can tag and version containers so that people, not just computers, can make effective use of them. So, before we build our own container, we need to choose a tag name. It's usually easy to just use the name of the software you are building. For example, if you're building a `Moof` container, a good tag name is `moof`. If you have a Dockerhub (or other public registry) account, you can add your username to the front of the tag. My Dockerhub account is `mwvaughn` so I could use a tag `mwvaughn/moof` when I build my Moof container.
+As we saw before, part of Docker's usefulness is that you can tag and version containers so that people, not just computers, can make effective use of them. Before we build our own container, we need to choose a tag name for it. It's common to just use the name of the software you are building. For example, if you're building a `Moof` container, a good tag name is `moof`. If you have a Dockerhub (or other public registry) account, you can add your username to the front of the tag. My Dockerhub account is `mwvaughn` so I could use the tag `mwvaughn/moof` when I build my [Moof](https://en.wikipedia.org/wiki/Dogcow) container.
 
-Today, let's use your *local username on the Dockerhost*. So, if you are building `bwa` and are logged in as user `demo16`, use the tag `demo16/bwa` like so `docker build -t demo16/bwa  .`
+:star2: Today, please use your *local username on the Docker host*. So, if you are are logged in as user `demo16` and building `bwa`, use the tag `demo16/bwa` like so `docker build -t demo16/bwa  .`
 
-Go ahead and import your Dockerfile and build an image. Likely, a lot of information will fly by! When it looks like everything has completed, confirm that your image go built by typing `docker images`
+Go ahead and import your Dockerfile and build an image. Likely, a lot of information will fly by - try to match it all up with what the Dockerfile says to do! 
 
-You should see something like this, except there will also be an image with your TAG associated with it.
+When it looks like everything has completed, confirm that your image got built by typing `docker images`. You should see something like this, except there will also be an image with *your tag* associated with it.
 
 ![Output from docker images command](images/docker-images.png)
 
 ### Run a container
 
-Go ahead and make your container go... 
+Containers are executable. That's the other part of their magic. You can do this with the following command:
 
 ```docker run [docker-options] TAG [command] [command options]```
 
@@ -173,5 +173,5 @@ For instance, try this one out:
 
 ### Building your own container
 
-In the remaining time (or on your own), make sure to try install Docker on your own system and try Dockerizing an application yourself. Pretty soon, you'll be unstoppable (or insufferable)!
+In the remaining time (or on your own), try Dockerizing an application yourself. Pretty soon, you'll be unstoppable (or insufferable)!
 
