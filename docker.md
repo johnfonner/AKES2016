@@ -171,7 +171,7 @@ For instance, try this one out:
 
 ```docker run docker/whalesay cowsay "Hello, BOSC!"```
 
-![Output from docker/whalesay](images/cowsway.png)
+![Output from docker/whalesay](images/cowsay.png)
 
 ### Building your own container
 
