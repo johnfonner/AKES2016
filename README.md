@@ -26,7 +26,7 @@ To participate in the workshop activities, you will need to bring your own compu
 | 14:10 - 14:50 | [Hacking session 3: Metadata, Reproducibility, and Collaboration (Hands-on)](sharing.md) |
 | 14:50 - 15:30 | [Workflow example (Hands-on)](workflow.md)                                               |
 | 15:30 - 16:00 | Coffee break                                                                             |
-| 16:00 - 16:30 | Web portals (Presentation)                                                               |
+| 16:00 - 16:30 | [Web portals (Presentation)](portals.md)                                                 |
 | 16:30 - 17:15 | Real world applications (Q&A Session and Discussion)                                     |
 | 17:15 - 17:30 | Closing thoughts and participation survey                                                | 
 
