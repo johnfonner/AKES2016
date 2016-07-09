@@ -8,6 +8,19 @@ If you do not have Cyverse credentials, they are quick and easy to get at [user.
 
 The easiest way to get started is to use the hosted Cyverse JupyterHub prepared for this workshop located at https://jupyter.cyverse.agaveapi.co.  Login with your Cyverse credentials.
 
+Once you have logged in, please open a new "bash" Notebook.
+
+![Bash Notebook](images/jupyter-bash.png)
+
+Once you have a notebook, test that everything is working with this command:
+
+```
+systems-list
+```
+
+You should get a list of some system names such as "data.iplantcollaborative.org".
+
+
 ## Hosted Docker
 
 For the sake of simplicity, we will use an in-browser shell to explore Docker.  This is cheating a bit on the "no command line" rule, but you can reproduce what we do in the workshop using Kitematic or other available apps.  For today, we don't want to require using your laptop for development, but as you continue to work with Docker, having it on your own laptop is terribly convenient.
