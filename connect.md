@@ -1,17 +1,65 @@
-## Agave JupyterHub
+# Resources required for the workshop
 
-The easiest way to get started is to use the hosted JupyterHub located at https://jupyter.cyverse.agaveapi.co.  Login with the credentials you just created.
+## Cyverse User Account
+
+If you do not have Cyverse credentials, they are quick and easy to get at [user.cyverse.org](user.cyverse.org).  For this workshop, they are required for connecting to Jupyterhub.  Once you have made credentials and confirmed your email address, it will take a few minutes for the account to propagate.
+
+## Cyverse JupyterHub
+
+The easiest way to get started is to use the hosted Cyverse JupyterHub prepared for this workshop located at https://jupyter.cyverse.agaveapi.co.  Login with your Cyverse credentials.
+
+Once you have logged in, please open a new "bash" Notebook.
+
+![Bash Notebook](images/jupyter-bash.png)
+
+Once you have a notebook, test that everything is working with this command:
+
+```
+systems-list
+```
+
+You should get a list of some system names such as "data.iplantcollaborative.org".
+
+
+## Hosted Docker
+
+For the sake of simplicity, we will use an in-browser shell to explore Docker.  This is cheating a bit on the "no command line" rule, but you can reproduce what we do in the workshop using Kitematic or other available apps.  For today, we don't want to require using your laptop for development, but as you continue to work with Docker, having it on your own laptop is terribly convenient.
+
+
+# Resources for working with Docker and the Science APIs on your own 
 
 ## Command line access
 
-Agave has a great set of command-line utilities on bitbucket.  They only require bash and Python's JSON tool to work, which, if you are on a Linux or Mac system is probably already there.  Pull down the tools using git:
+We already have this installed for you within the JupyterHub we will be using, but there is a great set of command-line utilities for the Cyverse APIs on github.  They only require bash and Python's JSON tool to work, which, if you are on a Linux or Mac system is probably already there.  Pull down the tools using git:
 
 ```
-git clone https://bitbucket.org/agaveapi/cli.git
-export PATH=$PATH:$PWD/cli
+git clone https://github.com/iPlantCollaborativeOpenSource/cyverse-sdk.git
+cd cyverse-sdk
+tar xf cyverse-cli.tgz
+mv cyverse-cli $HOME
+echo "PATH=\$PATH:\$HOME/cyverse-cli/bin" >> ~/.bashrc
+source ~/.bashrc
 ```
 
-### Creating a client
+A full explanation of the tools, installation, and example uses is available [on GitHub here](https://github.com/iPlantCollaborativeOpenSource/cyverse-sdk/blob/master/README.md)
+
+## Docker
+
+# Using the Science APIs
+
+If you use the hosted JupyterHub instance, it passes your token to the underlying Python or Bash tools when you login.  If you are accessing the Science APIs on your own, you need to follow the instructions below on selecting a tenant and setting up a client.
+
+## Selecting a tenant
+
+The "Agave API", which is the major component of the Cyverse Science APIs, is a multi-tenant service.  In the abstract, this means that the API can support other projects outside of Cyverse without completely replicating the infrastructure.  The practical side of this is that you need to tell the APIs which tenant you want to use.  To use the Cyverse tenant, which gives you access to quite a few system resources and a bunch of apps, you would type this:
+
+```
+tenants-init -t iplantc.org
+```
+
+Cyverse used to be called the iPlant Collaborative, and you will still see that reflected in some server names, like the one above.
+
+## Creating a client
 
 The Agave API uses OAuth 2 for managing authentication and authorization. Before you start working with the API on the command line, you will need to create a OAuth client application associated with a set of API keys. This is a one-time action, so if you already have a set of API keys, skip to the next tutorial. If not, you can create your keys using the Clients service as follows:
 
@@ -46,3 +94,5 @@ auth-tokens-refresh -S
 ```
 
 This topic is covered in great detail at [Authorization Guide](http://agaveapi.co/documentation/authorization-guide/) in the Agave live docs
+
+
