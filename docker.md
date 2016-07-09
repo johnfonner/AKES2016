@@ -32,7 +32,7 @@ You can [install Docker on Linux, Mac or even Windows systems](https://docs.dock
 
 You will see a screen resembling this one if you are successful in connecting to the host:
 
-![Jetstream Terminal](/images/login.png)
+![Jetstream Terminal](images/login.png)
 
 ### Running an existing container
 
