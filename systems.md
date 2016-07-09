@@ -51,7 +51,7 @@ Execution systems in Agave are very similar to storage systems.  They just have 
 
 ```json
 {
-  "id": "akes2016-exec-USERNAME",
+  "id": "akes2016-exec-demo24",
   "name": "Execution on my Jestream VM during AKES 2016",
   "status": "UP",
   "type": "EXECUTION",
@@ -61,14 +61,25 @@ Execution systems in Agave are very similar to storage systems.  They just have 
   "scheduler": "FORK",
   "environment": null,
   "maxSystemJobsPerUser": 1,
-  "scratchDir": "/home/USERNAME",
+  "scratchDir": "/home/demo24",
+  "queues": [ {
+    "name": "sb.q",
+    "maxJobs": 1,
+    "maxUserJobs": 1,
+    "maxNodes": 1,
+    "maxMemoryPerNode": "6GB",
+    "maxProcessorsPerNode": 1,
+    "maxRequestedTime": "01:00:00",
+    "customDirectives": null,
+    "default": true
+  }],
   "login": {
     "host": "js-18-186.jetstream-cloud.org",
     "port": 22,
     "protocol": "SSH",
     "auth": {
-      "username": "USERNAME",
-      "password": "CHANGEME",
+      "username": "demo24",
+      "password": "24demo",
       "type": "PASSWORD"
     }
   },
@@ -77,10 +88,10 @@ Execution systems in Agave are very similar to storage systems.  They just have 
     "port": 22,
     "protocol": "SFTP",
     "rootDir": "/",
-    "homeDir": "/home/USERNAME",
+    "homeDir": "/home/demo24",
     "auth": {
-      "username": "USERNAME",
-      "password": "CHANGME",
+      "username": "demo24",
+      "password": "24demo",
       "type": "PASSWORD"
     }
   }
