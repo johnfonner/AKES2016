@@ -2,7 +2,7 @@
 
 ## Cyverse User Account
 
-If you do not have Cyverse credentials, they are quick and easy to get at [user.cyverse.org](user.cyverse.org).  For this workshop, they are required for connecting to Jupyterhub.  Once you have made credentials and confirmed your email address, it will take a few minutes for the account to propagate.
+If you do not have Cyverse credentials, they are quick and easy to get at [https://user.cyverse.org](https://user.cyverse.org).  For this workshop, they are required for connecting to Jupyterhub.  Once you have made credentials and confirmed your email address, it will take a few minutes for the account to propagate.
 
 ## Cyverse JupyterHub
 
