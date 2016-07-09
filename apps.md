@@ -7,7 +7,7 @@ Agave keeps a registry of apps that you can list and search.  The Apps service p
 
 ## Registering an app  
 
-Registering an app with the Apps service is conceptually simple. Just describe your app as a JSON document and POST it to the Apps service. Historically, this has actually been the hardest part for new users to figure out. So, to ease the process, we've created a couple tools that you can use to define your apps. The first is the <a href="http://agaveapi.co/tools/app-builder/" title="App Builder">App Builder</a> page. On this page you will find a form-driven wizard that you can fill out generate the JSON description for your app. Once created, you can POST the JSON directly to the Apps service. If you are new to app registration, this is a great place to start because it shrinks the learning curve involved in defining your app.
+Registering an app with the Apps service is conceptually simple. Just describe your app as a JSON document and POST it to the Apps service. Historically, this has actually been the hardest part for new users to figure out. So, to ease the process, we've created a couple tools that you can use to define your apps. The first is the <a href="http://agaveapi.co/tools/app-builder/" title="App Builder">App Builder</a> page. On this page you will find a form-driven wizard that you can fill out generate the JSON description for your app. Once created, you can POST the JSON directly to the Apps service. If you are new to app registration, this is a great place to start because it shrinks the learning curve involved in defining your app. 
 
 The second tool is the <a href="https://bitbucket.org/taccaci/agave-samples/" title="Agave Samples Repository" target="_blank">Agave Samples</a> project. The Agave Samples project is a set of sample data that cover a lot of use cases. The project contains several app definitions ranging in complexity from a trivial no-parameter, no-argument hello world, to a complex multi-input application with multiple parameter types. The Agave Samples project is a great place to start when building your app by hand because it draws on the experiences of many successful application publishers. 
 
@@ -17,9 +17,9 @@ Agave apps are bundled into a directory and organized in a way that Agave can pr
 
 * An execution script that creates and executes an instance of the application. We refer to this as the <em>wrapper template</em> throughout the documentation. For the sake of maintainability, it should be named something simple and intuitive like `wrapper.sh`. More on this in the next section. 
 * A library subdirectory: This contains all scripts, non-standard dependencies, binaries needed to execute an instance of the application.  
-* A test directory containing a script named something simple and intuitive like `test.sh`, along with any sample data needed to evaluating whether the application can be executed in a current command-line environment. It should exit with a status of 0 on success when executed on the command line. A simple way to create your test script is to create a script that sets some sensible default values for your app's inputs and parameters and then call your wrapper template. 
+* A test directory containing a script named something simple and intuitive like `test.sh`, along with any sample data needed to evaluating whether the application can be executed in a current command-line environment. It should exit with a status of 0 on success when executed on the command line. A simple way to create your test script is to create a script that sets some sensible default values for your app's inputs and parameters then calls your wrapper template. 
 
-The resulting minimal app bundle would look something like the following:
+A "minimal" app bundle would look something like the following:
 
 ```always
 pyplot-0.1.0
@@ -33,23 +33,45 @@ pyplot-0.1.0
 
 ## An example app
 
+Create an app directory `wc` and cd into it.
+
+### Wrapper script
+
+We have set this up to have a minimal wrapper script
+
+Create this file as `wrapper.txt`:
+
+```sh
+wc ${query1} > wc_out.txt
+```
+
+Within a wrapper script, you can reference the ID of any Agave input or parameter from the app description.  Before executing a wrapper script, Agave will look for the these references and substitute in whatever was that value was.  This will make more sense once we start running jobs, but this is the way we connect what you tell the Agave API that you want to do and what actually runs on the execution system.  The other thing Agave will do with the wrapper script is prepend all the scheduler information necessary to run the script on the execution system.
+
+### Test script
+
+Create a file `test.txt`
+
+```sh
+exit 0
+```
+
 ### The app description
 
 Below is a simple app description that takes a single file and no parameters as input and creates one file as output.  The app description we give to Agave can be simpler than what is below, but a number of optional fields were included to demonstrate their use.
 
 ```json
 {  
-   "name":"wc-uhhpc-USERNAME",
+   "name":"akes2016-wc-USERNAME",
    "version":"1.0",
    "label":"Linux wc utility",
    "shortDescription":"Count words in a file",
    "longDescription":"",
    "tags":[ "gnu", "textutils" ],
-   "deploymentSystem":"uhhpc1-lustre-USERNAME",
-   "deploymentPath":"apps/wc/",
-   "templatePath":"/wrapper.sh",
-   "testPath":"/test.sh",
-   "executionSystem":"uhhpc1-exec-USERNAME",
+   "deploymentSystem":"data.iplantcollaborative.org",
+   "deploymentPath":"CYVERSE-USERNAME/applications/wc",
+   "templatePath":"/wrapper.txt",
+   "testPath":"/test.txt",
+   "executionSystem":"akes2016-exec-USERNAME",
    "executionType":"HPC",
    "parallelism":"SERIAL",
    "modules":[],
@@ -108,25 +130,21 @@ Looking at some of the important keywords:
 * **argument** - In combination with "showArgument", the "argument" keyword is a convenience that lets you build up commandline arguments in your wrapper script.
 * **Cardinality** - Sets the min and max number of files you can give for inputs and outputs.  A "maxCardinality" of -1 will accept an unlimited number of files.
 
-### Wrapper script
-
-We have set this up to have a minimal wrapper script:
-
-```sh
-wc ${query1} > wc_out.txt
-```
-
-Within a wrapper script, you can reference the ID of any Agave input or parameter from the app description.  Before executing a wrapper script, Agave will look for the these references and substitute in whatever was that value was.  This will make more sense once we start running jobs, but this is the way we connect what you tell the Agave API that you want to do and what actually runs on the execution system.  The other thing Agave will do with the wrapper script is prepend all the scheduler information necessary to run the script on the execution system.
 
 ## Registering an app
 
-Once you have an application bundle ready to go, you can register the app with the following CLI command:
+Once you have an application bundle ready to go, upload it to its storage host, then register the app with the following CLI commands:
 
 ```
-apps-addupdate -F app.json
+files-upload -F BUNDLEDIR CYVERSE-USERNAME/applications
+apps-addupdate -F BUNDLEDIR/app.txt
 ```
 
-Agave will check the app description, look for the app bundle on the deploymentSystem, and if everything passes, make it available to run jobs against
+Agave will check the app description, look for the app bundle on the deploymentSystem, and if everything passes, make it available to run jobs against.
+
+## Upload a file to count words
+
+`files-import -U https://bitbucket.org/taccaci/agave-samples/raw/57442c86c6a30615400493186ecc2a34b2f15895/apps/pyplot-demo/basic/pyplot-demo-basic-0.1.0/test/testdata.csv -S akes2016-storage-teacher2`
 
 ## Running a job
 
@@ -135,17 +153,16 @@ Once you have at least one app registered, you can start running jobs.  To run a
 ```
 {
   "name":"test-wc-job",
-  "appId": "wc-uhhpc-USERNAME-1.0",
-  "executionSystem": "uhhpc1-exec-USERNAME",
+  "appId": "akes2016-wc-USERNAME-1.0",
+  "executionSystem": "akes2016-exec-USERNAME",
   "batchQueue": "sb.q",
   "maxRunTime": "00:10:00",
   "nodeCount": 1,
   "processorsPerNode": 1,
   "archive": true,
-  "archiveSystem": "uhhpc1-lustre-USERNAME",
-  "archivePath": "./test-wc-job-out/",
+  "archiveSystem": "akes2016-storage-USERNAME",
   "inputs": {
-    "query1": "agave://uhhpc1-lustre-USERNAME/input1.txt"
+    "query1": "agave://akes2016-storage-USERNAME/input1.txt"
   },
   "parameters": {
   },
@@ -171,10 +188,10 @@ Once you have at least one app registered, you can start running jobs.  To run a
 
 Note that you can specify which queue to use as well as runtime limits in your job.  If those are absent, Agave falls back to whatever was listed in the app description (also optional).  If that app doesn't specify, then it falls back to the defaults given for the execution system.
 
-Once you have your job.json file ready, you can submit a job using this command:
+Once you have your `job.txt` file ready, you can submit a job using this command:
 
 ```
-jobs-submit -F job.json
+jobs-submit -F job.txt
 ```
 
 If you have direct access to the system where you are running the job, it is fun to watch it progress through on the system itself.  You can also use Agave to track job progress by using the job ID that it gave you.  If you didn't get it when you ran the job, you can look at all your job IDs with this command:
